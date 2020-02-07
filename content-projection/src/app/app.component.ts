@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, ComponentFactoryResolver, ReflectiveInjector, EmbeddedViewRef, ApplicationRef } from '@angular/core';
 import { TableColumnComponent } from './components/table/table.component';
+import { DynamicCompComponent } from './dynamic-comp/dynamic-comp.component';
 
 
 @Component({
@@ -23,6 +24,9 @@ export class MyBrandComponent extends TableColumnComponent {
 export class AppComponent {
   title = 'content-projection';
 
+  constructor(private cfr: ComponentFactoryResolver, private appRef: ApplicationRef) {
+  }
+
   phones = [{
     name: 'Iphone X',
     brand: 'Apple',
@@ -32,4 +36,17 @@ export class AppComponent {
     brand: 'Samsung',
     price: 500
   }];
+
+  onClick() {
+    const factory = this.cfr.resolveComponentFactory(DynamicCompComponent);
+    const compRef = factory.create(ReflectiveInjector.resolveAndCreate([{
+      provide: 'myData',
+      useValue: 'test'
+    }]));
+
+    this.appRef.attachView(compRef.hostView);
+
+    const el = (compRef.hostView as EmbeddedViewRef<any>).rootNodes[0];
+    document.body.appendChild(el);
+  }
 }
