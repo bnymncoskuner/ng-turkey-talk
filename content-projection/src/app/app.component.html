@@ -1,7 +1,7 @@
 <app-panel>
   <app-panel-title>Content Projection</app-panel-title>
   <app-table [data]="phones">
-    <app-table-column field="brand" header="Marka"></app-table-column>
+    <my-brand-column></my-brand-column>
     <app-table-column field="name" header="Model"></app-table-column>
     <app-table-column field="price" header="Fiyat">
       <ng-template column-body let-row>

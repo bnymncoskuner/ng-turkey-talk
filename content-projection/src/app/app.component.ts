@@ -1,4 +1,19 @@
 import { Component } from '@angular/core';
+import { TableColumnComponent } from './components/table/table.component';
+
+
+@Component({
+  selector: 'my-brand-column',
+  template: ``,
+  providers: [{
+    provide: TableColumnComponent,
+    useExisting: MyBrandComponent
+  }]
+})
+export class MyBrandComponent extends TableColumnComponent {
+  field = 'brand';
+  header = 'Custom Marka';
+}
 
 @Component({
   selector: 'app-root',
