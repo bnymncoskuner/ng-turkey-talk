@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { TableComponent, TableColumnComponent } from './table.component';
+import { TableComponent, TableColumnComponent, TableColumnBodyDirective } from './table.component';
 
 const exported = [
-  TableColumnComponent, TableComponent
+  TableColumnComponent, TableComponent, TableColumnBodyDirective
 ];
 
 @NgModule({
