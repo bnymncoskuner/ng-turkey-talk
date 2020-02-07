@@ -1,14 +1,16 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { PanelComponent } from './panel.component';
+import { PanelComponent, PanelTitleComponent } from './panel.component';
 
-
+const exportedComponents = [
+  PanelTitleComponent, PanelComponent
+];
 
 @NgModule({
-  declarations: [PanelComponent],
+  declarations: [exportedComponents],
   imports: [
     CommonModule
   ],
-  exports: [PanelComponent]
+  exports: [exportedComponents]
 })
 export class PanelModule { }
