@@ -1,4 +1,8 @@
 <app-panel>
   <app-panel-title>Content Projection</app-panel-title>
-  NG Turkey
+  <app-table [data]="phones">
+    <app-table-column field="brand" header="Marka"></app-table-column>
+    <app-table-column field="name" header="Model"></app-table-column>
+    <app-table-column field="price" header="Fiyat"></app-table-column>
+  </app-table>
 </app-panel>
