@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ContentChildren, QueryList, Directive, TemplateRef, ContentChild } from '@angular/core';
+import { Component, OnInit, Input, ContentChildren, QueryList, Directive, TemplateRef, ContentChild, ViewChild } from '@angular/core';
 
 
 @Directive({ selector: '[column-body]' })
@@ -15,6 +15,17 @@ export class TableColumnComponent {
   @Input() header;
 
   @ContentChild(TableColumnBodyDirective) customBody: TableColumnBodyDirective;
+}
+
+
+@Component({
+  selector: 'app-table-foot',
+  template: `
+    <ng-template><ng-content></ng-content></ng-template>
+  `
+})
+export class TableFootComponent {
+  @ViewChild(TemplateRef, {static: true}) template: TemplateRef<any>;
 }
 
 @Component({
@@ -40,6 +51,9 @@ export class TableColumnComponent {
           </td>
         </tr>
       </tbody>
+      <tfoot *ngIf="foot">
+        <ng-container *ngTemplateOutlet="foot.template"></ng-container>
+      </tfoot>
     </table>
   `,
   styleUrls: ['./table.component.scss']
@@ -48,6 +62,7 @@ export class TableComponent implements OnInit {
 
   @Input() data: any[];
   @ContentChildren(TableColumnComponent) columns: QueryList<TableColumnComponent>;
+  @ContentChild(TableFootComponent) foot: TableFootComponent;
 
   constructor() { }
 
